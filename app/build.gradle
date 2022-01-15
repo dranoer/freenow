@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -46,4 +49,27 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation "androidx.test.ext:junit:$rootProject.junit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleExtensions"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycle"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragment"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
+
+    // DI
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt"
+
+    // Network
+    implementation("com.squareup.retrofit2:retrofit:$rootProject.retrofit") {
+        exclude module: 'okhttp'
+    }
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$rootProject.okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp"
+    implementation "com.google.code.gson:gson:$rootProject.gson"
 }
