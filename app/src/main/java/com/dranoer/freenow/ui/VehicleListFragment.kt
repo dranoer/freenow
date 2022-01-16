@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dranoer.freenow.R
 import com.dranoer.freenow.databinding.FragmentVehicleListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,8 +21,11 @@ class VehicleListFragment : Fragment() {
 
     val viewModel: VehicleViewModel by viewModels()
 
+    private lateinit var navHost: Fragment
+
     companion object {
         fun newInstance() = VehicleListFragment()
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 999
     }
 
     override fun onCreateView(
@@ -28,6 +33,10 @@ class VehicleListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentVehicleListBinding.inflate(inflater, container, false)
+
+        navHost =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
+
         return binding.root
     }
 
@@ -37,7 +46,10 @@ class VehicleListFragment : Fragment() {
         viewModel.getVehicles()
 
         val recyclerView = binding.recyclerview
-        val adapter = VehicleAdapter(VehicleAdapter.OnClickListener {})
+        val adapter = VehicleAdapter(VehicleAdapter.OnClickListener {
+            val action = VehicleListFragmentDirections.actionVehicleListToMap()
+            navHost.findNavController().navigate(action)
+        })
         recyclerView.adapter = adapter
         recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

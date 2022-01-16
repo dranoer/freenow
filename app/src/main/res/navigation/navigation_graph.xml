@@ -7,5 +7,15 @@
     <fragment
         android:id="@+id/vehicleListFragment"
         android:name="com.dranoer.freenow.ui.VehicleListFragment"
-        android:label="VehicleListFragment" />
+        android:label="VehicleListFragment">
+
+        <action
+            android:id="@+id/action_vehicle_list_to_map"
+            app:destination="@+id/mapFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.dranoer.freenow.ui.MapFragment"
+        android:label="MapFragment" />
 </navigation>
