@@ -32,6 +32,8 @@ ext {
     okhttp = '4.9.1'
     gson = '2.8.6'
     navigation = '2.3.5'
+    location = '19.0.1'
+    map = '17.0.1'
 }
 
 task clean(type: Delete) {
