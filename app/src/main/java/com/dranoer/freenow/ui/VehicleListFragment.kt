@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +19,7 @@ class VehicleListFragment : Fragment() {
     private var _binding: FragmentVehicleListBinding? = null
     private val binding get() = _binding!!
 
-    val viewModel: VehicleViewModel by viewModels()
+    val viewModel: VehicleViewModel by activityViewModels()
 
     private lateinit var navHost: Fragment
 
