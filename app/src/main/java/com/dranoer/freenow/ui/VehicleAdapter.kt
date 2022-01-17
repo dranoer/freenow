@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dranoer.freenow.R
-import com.dranoer.freenow.data.model.VehicleModel
+import com.dranoer.freenow.data.model.VehicleEntity
 
 class VehicleAdapter constructor(
     private val onClickListener: OnClickListener
-) : ListAdapter<VehicleModel, VehicleAdapter.MainViewHolder>(COMPARATOR) {
+) : ListAdapter<VehicleEntity, VehicleAdapter.MainViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         return MainViewHolder.create(parent)
@@ -48,12 +48,15 @@ class VehicleAdapter constructor(
     }
 
     companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<VehicleModel>() {
-            override fun areItemsTheSame(oldItem: VehicleModel, newItem: VehicleModel): Boolean {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<VehicleEntity>() {
+            override fun areItemsTheSame(oldItem: VehicleEntity, newItem: VehicleEntity): Boolean {
                 return oldItem === newItem
             }
 
-            override fun areContentsTheSame(oldItem: VehicleModel, newItem: VehicleModel): Boolean {
+            override fun areContentsTheSame(
+                oldItem: VehicleEntity,
+                newItem: VehicleEntity
+            ): Boolean {
                 return oldItem.id == newItem.id
             }
         }

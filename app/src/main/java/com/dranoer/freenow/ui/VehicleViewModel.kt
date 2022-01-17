@@ -1,10 +1,8 @@
 package com.dranoer.freenow.ui
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.dranoer.freenow.data.model.VehicleEntity
 import com.dranoer.freenow.data.model.VehicleModel
 import com.dranoer.freenow.data.remote.Resource
 import com.dranoer.freenow.domain.VehicleRepository
@@ -18,9 +16,13 @@ class VehicleViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _vehicles = MutableLiveData<List<VehicleModel>>()
-    val vehicles: LiveData<List<VehicleModel>> = _vehicles
+    val vehicles: LiveData<List<VehicleEntity>> = repository.vehicles.asLiveData()
 
-    fun getVehicles() {
+    init {
+        getVehicles()
+    }
+
+    private fun getVehicles() {
         viewModelScope.launch {
             val result = repository.getVehicles()
 

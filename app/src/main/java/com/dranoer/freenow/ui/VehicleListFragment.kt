@@ -23,11 +23,6 @@ class VehicleListFragment : Fragment() {
 
     private lateinit var navHost: Fragment
 
-    companion object {
-        fun newInstance() = VehicleListFragment()
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 999
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,8 +37,6 @@ class VehicleListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getVehicles()
 
         val recyclerView = binding.recyclerview
         val adapter = VehicleAdapter(VehicleAdapter.OnClickListener {

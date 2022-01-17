@@ -7,12 +7,15 @@ import com.dranoer.freenow.data.model.VehicleEntity
 import com.dranoer.freenow.data.remote.NetworkDataSource
 import com.dranoer.freenow.data.remote.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class VehicleRepository @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource,
 ) {
+
+    val vehicles: Flow<List<VehicleEntity>> = localDataSource.vehicles
 
     @ExperimentalCoroutinesApi
     suspend fun getVehicles(): Resource<Response> {
