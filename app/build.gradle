@@ -84,4 +84,8 @@ dependencies {
     // Location
     implementation "com.google.android.gms:play-services-location:$rootProject.location"
     implementation "com.google.android.gms:play-services-maps:$rootProject.map"
+
+    // Database
+    implementation "androidx.room:room-ktx:$rootProject.room"
+    kapt "androidx.room:room-compiler:$rootProject.room"
 }
