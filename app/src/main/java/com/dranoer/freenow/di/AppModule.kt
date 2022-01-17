@@ -1,8 +1,12 @@
 package com.dranoer.freenow.di
 
+import android.content.Context
+import androidx.room.Room
 import com.dranoer.freenow.BuildConfig
 import com.dranoer.freenow.Constants
+import com.dranoer.freenow.Constants.DATABASE_NAME
 import com.dranoer.freenow.Constants.TIME_OUT
+import com.dranoer.freenow.data.local.VehicleDatabase
 import com.dranoer.freenow.data.remote.NetworkDataSource
 import com.dranoer.freenow.data.remote.WebService
 import com.dranoer.freenow.domain.VehicleRepository
@@ -10,6 +14,7 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -52,4 +57,18 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepository(remoteSource: NetworkDataSource) = VehicleRepository(remoteSource)
+
+    @Singleton
+    @Provides
+    fun provideRoomInstance(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context,
+        VehicleDatabase::class.java,
+        DATABASE_NAME
+    ).fallbackToDestructiveMigration().build()
+
+    @Singleton
+    @Provides
+    fun provideDao(db: VehicleDatabase) = db.vehicleDao()
 }
