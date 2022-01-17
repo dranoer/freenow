@@ -6,6 +6,7 @@ import com.dranoer.freenow.BuildConfig
 import com.dranoer.freenow.Constants
 import com.dranoer.freenow.Constants.DATABASE_NAME
 import com.dranoer.freenow.Constants.TIME_OUT
+import com.dranoer.freenow.data.local.LocalDataSource
 import com.dranoer.freenow.data.local.VehicleDatabase
 import com.dranoer.freenow.data.remote.NetworkDataSource
 import com.dranoer.freenow.data.remote.WebService
@@ -56,7 +57,10 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(remoteSource: NetworkDataSource) = VehicleRepository(remoteSource)
+    fun provideRepository(
+        remoteSource: NetworkDataSource,
+        localSource: LocalDataSource,
+    ) = VehicleRepository(remoteSource, localSource)
 
     @Singleton
     @Provides
