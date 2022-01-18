@@ -25,7 +25,7 @@ class VehicleAdapter constructor(
             id = current.id,
         )
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(current.id)
+            onClickListener.onClick(current.id, current.latitude, current.longitude)
         }
     }
 
@@ -62,7 +62,7 @@ class VehicleAdapter constructor(
         }
     }
 
-    class OnClickListener(val clickListener: (id: Long) -> Unit) {
-        fun onClick(id: Long) = clickListener(id)
+    class OnClickListener(val clickListener: (id: Long, latitude: Double, longitude: Double) -> Unit) {
+        fun onClick(id: Long, lat: Double, lng: Double) = clickListener(id, lat, lng)
     }
 }

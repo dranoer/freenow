@@ -9,6 +9,7 @@ object Constants {
     const val LONGITUDE_ONE = 9.757589
     const val LATITUDE_TWO = 53.394655
     const val LONGITUDE_TWO = 10.099891
+    const val ZOOM = 14F
 
     const val DATABASE_NAME = "vehicle_database"
 }

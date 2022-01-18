@@ -17,5 +17,16 @@
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.dranoer.freenow.ui.MapFragment"
-        android:label="MapFragment" />
+        android:label="MapFragment">
+
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="string" />
+    </fragment>
 </navigation>

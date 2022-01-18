@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.dranoer.freenow.Constants
+import androidx.navigation.fragment.navArgs
+import com.dranoer.freenow.Constants.ZOOM
 import com.dranoer.freenow.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -19,11 +20,13 @@ import dagger.hilt.android.AndroidEntryPoint
 class MapFragment : Fragment() {
 
     val viewModel: VehicleViewModel by activityViewModels()
+    val args: MapFragmentArgs by navArgs()
 
     private val callback = OnMapReadyCallback { googleMap ->
-        val sydney = LatLng(Constants.LATITUDE_ONE, Constants.LONGITUDE_ONE)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13f))
+        val selectedPosition = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
+        googleMap.addMarker(MarkerOptions().position(selectedPosition).title(args.id.toString()))
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedPosition, ZOOM))
 
         viewModel.vehicles.observe(viewLifecycleOwner) {
             for (item in it) {
