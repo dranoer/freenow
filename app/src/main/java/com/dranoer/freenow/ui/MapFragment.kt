@@ -23,7 +23,7 @@ class MapFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         val sydney = LatLng(Constants.LATITUDE_ONE, Constants.LONGITUDE_ONE)
         googleMap.addMarker(MarkerOptions().position(sydney).title("Marker"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13f))
 
         viewModel.vehicles.observe(viewLifecycleOwner) {
             for (item in it) {
