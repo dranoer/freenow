@@ -17,15 +17,18 @@ class VehicleViewModel @Inject constructor(
     var repository: VehicleRepository
 ) : ViewModel() {
 
+    var firstTime = true
     val vehicles: LiveData<List<VehicleEntity>> = repository.vehicles.asLiveData()
 
     @ExperimentalCoroutinesApi
     @JvmName("getVehiclesFromRemote")
     fun getVehicles() = liveData(Dispatchers.IO) {
-        emit(Resource.Loading())
-
         try {
-            emit(repository.getVehicles())
+            if (firstTime) {
+                emit(Resource.Loading())
+                emit(repository.getVehicles())
+                firstTime = false
+            }
         } catch (e: Exception) {
             emit(Resource.Failure(e))
         }
