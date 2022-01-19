@@ -3,6 +3,7 @@ package com.dranoer.freenow.domain
 import android.util.Log
 import com.dranoer.freenow.Constants.TAG
 import com.dranoer.freenow.data.local.LocalDataSource
+import com.dranoer.freenow.data.model.FleetType
 import com.dranoer.freenow.data.model.Response
 import com.dranoer.freenow.data.model.VehicleEntity
 import com.dranoer.freenow.data.remote.NetworkDataSource
@@ -24,11 +25,13 @@ class VehicleRepository @ExperimentalCoroutinesApi @Inject constructor(
         val response = networkDataSource.getVehicles()
         when (response) {
             is Resource.Success -> {
+                // ToDo 03 : Refactor
                 for (item in response.data.response) {
                     localDataSource.saveVehicle(
+                        // Todo 01 : To write a mapper
                         VehicleEntity(
                             id = item.id,
-                            fleetType = item.fleetType,
+                            fleetType = FleetType.mapFromName(item.fleetType),
                             latitude = item.coordinate.latitude,
                             longitude = item.coordinate.longitude
                         )
@@ -36,6 +39,7 @@ class VehicleRepository @ExperimentalCoroutinesApi @Inject constructor(
                 }
             }
             else -> {
+                // Todo 04 : Turn to error
                 Log.d(TAG, "Response was not successful so it has not saved in the local db")
             }
         }

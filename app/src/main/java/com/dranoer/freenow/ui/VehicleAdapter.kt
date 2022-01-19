@@ -21,7 +21,7 @@ class VehicleAdapter constructor(
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(
-            fleetType = current.fleetType,
+            fleetType = current.fleetType.title,
             id = current.id,
         )
         holder.itemView.setOnClickListener {

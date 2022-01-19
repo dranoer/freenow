@@ -21,7 +21,12 @@ data class VehicleModel(
 
     @field:SerializedName("heading")
     val heading: Double,
-)
+) {
+    companion object {
+        const val POOLING = "POOLING"
+        const val TAXI = "TAXI"
+    }
+}
 
 data class Coordinate(
 
