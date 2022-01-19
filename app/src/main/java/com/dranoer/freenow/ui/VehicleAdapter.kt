@@ -11,7 +11,7 @@ import com.dranoer.freenow.R
 import com.dranoer.freenow.data.model.VehicleEntity
 
 class VehicleAdapter constructor(
-    private val onClickListener: OnClickListener
+    private val onClickListener: (id: Long, latitude: Double, longitude: Double) -> Unit
 ) : ListAdapter<VehicleEntity, VehicleAdapter.MainViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -25,7 +25,7 @@ class VehicleAdapter constructor(
             id = current.id,
         )
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(current.id, current.latitude, current.longitude)
+            onClickListener.invoke(current.id, current.latitude, current.longitude)
         }
     }
 
@@ -60,9 +60,5 @@ class VehicleAdapter constructor(
                 return oldItem.id == newItem.id
             }
         }
-    }
-
-    class OnClickListener(val clickListener: (id: Long, latitude: Double, longitude: Double) -> Unit) {
-        fun onClick(id: Long, lat: Double, lng: Double) = clickListener(id, lat, lng)
     }
 }

@@ -44,7 +44,8 @@ class VehicleListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = binding.recyclerview
-        val adapter = VehicleAdapter(VehicleAdapter.OnClickListener { id, lat, lng ->
+
+        val adapter = VehicleAdapter(onClickListener = { id, lat, lng ->
             val action = VehicleListFragmentDirections.actionVehicleListToMap(
                 id,
                 lat.toString(),
