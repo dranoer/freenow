@@ -1,6 +1,7 @@
 package com.dranoer.freenow.domain
 
 import android.util.Log
+import com.dranoer.freenow.Constants.TAG
 import com.dranoer.freenow.data.local.LocalDataSource
 import com.dranoer.freenow.data.model.Response
 import com.dranoer.freenow.data.model.VehicleEntity
@@ -10,7 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class VehicleRepository @Inject constructor(
+class VehicleRepository @ExperimentalCoroutinesApi @Inject constructor(
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource,
 ) {
@@ -35,7 +36,7 @@ class VehicleRepository @Inject constructor(
                 }
             }
             else -> {
-                Log.d("nazanin", "Response was not successful so it has not saved in the local db")
+                Log.d(TAG, "Response was not successful so it has not saved in the local db")
             }
         }
 

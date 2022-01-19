@@ -12,4 +12,6 @@ object Constants {
     const val ZOOM = 14F
 
     const val DATABASE_NAME = "vehicle_database"
+
+    const val TAG = "theTag"
 }
