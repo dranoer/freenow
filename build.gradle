@@ -35,6 +35,7 @@ ext {
     location = '19.0.1'
     map = '17.0.1'
     room = '2.3.0'
+    coil = '1.4.0'
 }
 
 task clean(type: Delete) {

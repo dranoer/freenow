@@ -48,6 +48,7 @@ dependencies {
     // Ui
     implementation "com.google.android.material:material:$rootProject.material"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout"
+    implementation "io.coil-kt:coil:$rootProject.coil"
 
     // Test
     testImplementation 'junit:junit:4.+'
