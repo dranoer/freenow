@@ -2,6 +2,7 @@ package com.dranoer.freenow.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.dranoer.freenow.R
 
 // ToDo 02 : to use a location object instead of separate lat and lng
 @Entity(tableName = "vehicle_list_table")
@@ -14,7 +15,9 @@ data class VehicleEntity(
 )
 
 enum class FleetType(val title: String, val icon: Int) {
-    Pooling("Pooling", 1), Taxi("Taxi", 1), Unknown("Unknown", 1);
+    Pooling("Pooling", R.drawable.ic_pooling),
+    Taxi("Taxi", R.drawable.ic_taxi),
+    Unknown("Unknown", R.drawable.ic_unknown);
 
     companion object {
         fun mapFromName(name: String): FleetType {

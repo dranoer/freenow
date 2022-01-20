@@ -10,7 +10,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dranoer.freenow.Constants.TAG
 import com.dranoer.freenow.R
@@ -54,7 +53,6 @@ class VehicleListFragment : Fragment() {
             navHost.findNavController().navigate(action)
         })
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.getVehicles().observe(viewLifecycleOwner) { result ->

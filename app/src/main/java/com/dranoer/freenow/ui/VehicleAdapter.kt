@@ -3,10 +3,12 @@ package com.dranoer.freenow.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.dranoer.freenow.R
 import com.dranoer.freenow.data.model.VehicleEntity
 
@@ -21,7 +23,8 @@ class VehicleAdapter constructor(
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(
-            fleetType = current.fleetType.title,
+            fleetName = current.fleetType.title,
+            fleetIcon = current.fleetType.icon,
             id = current.id,
         )
         holder.itemView.setOnClickListener {
@@ -30,12 +33,17 @@ class VehicleAdapter constructor(
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val fleetTypeItemView: TextView = itemView.findViewById(R.id.vehicle_title)
         private val idItemView: TextView = itemView.findViewById(R.id.vehicle_id)
+        private val fleetNameItemView: TextView = itemView.findViewById(R.id.vehicle_title)
+        private val fleetIconItemView: ImageView = itemView.findViewById(R.id.vehicle_icon)
 
-        fun bind(fleetType: String?, id: Long) {
-            fleetTypeItemView.text = itemView.context.getString(R.string.fleet_type, fleetType)
+        fun bind(id: Long, fleetName: String?, fleetIcon: Int) {
+            fleetNameItemView.text = fleetName
             idItemView.text = itemView.context.getString(R.string.vehicle_id, id.toString())
+            fleetIconItemView.load(fleetIcon) {
+                crossfade(true)
+                placeholder(R.drawable.loading)
+            }
         }
 
         companion object {

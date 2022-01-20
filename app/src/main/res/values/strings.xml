@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Freenow</string>
 
-    <string name="fleet_type">Fleet type: %s</string>
     <string name="vehicle_id">Vehicle ID: %s</string>
 </resources>
