@@ -45,6 +45,12 @@ class VehicleListFragment : Fragment() {
         setupViewState()
     }
 
+    /**
+     * Setup view
+     *
+     * This function observe the response which is coming from remote.
+     * It has three states: Loading, Success and Failure
+     */
     private fun setupViewState() {
         viewModel.getVehicles().observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -62,6 +68,14 @@ class VehicleListFragment : Fragment() {
         }
     }
 
+    /**
+     * Setup view
+     *
+     * This function setup the list of vehicles which is coming from local database.
+     * It has two functionality:
+     *   - Instantiate the adapter for recyclerview
+     *   - Fill adapter with local data
+     */
     private fun setupVehicleList() {
         val recyclerView = binding.recyclerview
         val adapter = VehicleAdapter(onClickListener = { id, lat, lng ->

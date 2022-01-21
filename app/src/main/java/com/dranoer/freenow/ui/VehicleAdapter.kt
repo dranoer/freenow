@@ -37,6 +37,14 @@ class VehicleAdapter constructor(
         private val fleetNameItemView: TextView = itemView.findViewById(R.id.vehicle_title)
         private val fleetIconItemView: ImageView = itemView.findViewById(R.id.vehicle_icon)
 
+        /**
+         * Binding vehicle items
+         *
+         * This function setups each vehicle item with proper data
+         * @property id the vehicle id
+         * @Property fleetName the type of vehicle
+         * @Property fleetIcon the custom icon for vehicle
+         */
         fun bind(id: Long, fleetName: String?, fleetIcon: Int) {
             fleetNameItemView.text = fleetName
             idItemView.text = itemView.context.getString(R.string.vehicle_id, id.toString())

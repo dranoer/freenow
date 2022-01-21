@@ -23,6 +23,15 @@ class MapFragment : Fragment() {
     val viewModel: VehicleViewModel by activityViewModels()
     private val args: MapFragmentArgs by navArgs()
 
+    /**
+     * Setup map
+     *
+     * This is a callback for when the map is ready.
+     * It has three functionality:
+     *   - Add marker on each vehicle on the map
+     *   - Zoom on the selected item coming from the previous screen
+     *   - Setup map with zooming controller icons
+     */
     private val callback = OnMapReadyCallback { googleMap ->
         googleMap.uiSettings.isZoomControlsEnabled = true
         val selectedPosition = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
