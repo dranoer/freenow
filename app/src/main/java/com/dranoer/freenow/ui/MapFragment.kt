@@ -12,6 +12,7 @@ import com.dranoer.freenow.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,9 +24,8 @@ class MapFragment : Fragment() {
     val args: MapFragmentArgs by navArgs()
 
     private val callback = OnMapReadyCallback { googleMap ->
-        val selectedPosition = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
-        googleMap.addMarker(MarkerOptions().position(selectedPosition).title(args.id.toString()))
         googleMap.uiSettings.isZoomControlsEnabled = true
+        val selectedPosition = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedPosition, ZOOM))
 
         viewModel.vehicles.observe(viewLifecycleOwner) {
@@ -34,6 +34,8 @@ class MapFragment : Fragment() {
                     MarkerOptions()
                         .position(LatLng(item.latitude, item.longitude))
                         .title(item.id.toString())
+                        .snippet(item.fleetType.name)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.taxi_marker))
                 )
             }
         }
