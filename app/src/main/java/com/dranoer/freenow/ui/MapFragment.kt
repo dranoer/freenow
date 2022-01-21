@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MapFragment : Fragment() {
 
     val viewModel: VehicleViewModel by activityViewModels()
-    val args: MapFragmentArgs by navArgs()
+    private val args: MapFragmentArgs by navArgs()
 
     private val callback = OnMapReadyCallback { googleMap ->
         googleMap.uiSettings.isZoomControlsEnabled = true
@@ -29,7 +29,7 @@ class MapFragment : Fragment() {
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedPosition, ZOOM))
 
         viewModel.vehicles.observe(viewLifecycleOwner) {
-            for (item in it) {
+            it.forEach { item ->
                 googleMap.addMarker(
                     MarkerOptions()
                         .position(LatLng(item.latitude, item.longitude))

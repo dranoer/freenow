@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.dranoer.freenow.R
 
-// ToDo 02 : to use a location object instead of separate lat and lng
 @Entity(tableName = "vehicle_list_table")
 data class VehicleEntity(
     @PrimaryKey

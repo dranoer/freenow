@@ -30,7 +30,6 @@ class VehicleRepository @ExperimentalCoroutinesApi @Inject constructor(
                 }
             }
             else -> {
-                // Todo 04 : Turn to error
                 Log.d(TAG, "Response was not successful so it has not saved in the local db")
             }
         }

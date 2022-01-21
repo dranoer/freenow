@@ -30,9 +30,8 @@ class VehicleListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentVehicleListBinding.inflate(inflater, container, false)
-
         navHost =
             requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment)!!
 
@@ -42,19 +41,11 @@ class VehicleListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = binding.recyclerview
+        setupVehicleList()
+        setupViewState()
+    }
 
-        val adapter = VehicleAdapter(onClickListener = { id, lat, lng ->
-            val action = VehicleListFragmentDirections.actionVehicleListToMap(
-                id,
-                lat.toString(),
-                lng.toString()
-            )
-            navHost.findNavController().navigate(action)
-        })
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+    private fun setupViewState() {
         viewModel.getVehicles().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Loading -> {
@@ -69,6 +60,20 @@ class VehicleListFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setupVehicleList() {
+        val recyclerView = binding.recyclerview
+        val adapter = VehicleAdapter(onClickListener = { id, lat, lng ->
+            val action = VehicleListFragmentDirections.actionVehicleListToMap(
+                id,
+                lat.toString(),
+                lng.toString()
+            )
+            navHost.findNavController().navigate(action)
+        })
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         viewModel.vehicles.observe(viewLifecycleOwner) {
             adapter.submitList(it)
