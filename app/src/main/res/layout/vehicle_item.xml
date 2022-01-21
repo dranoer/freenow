@@ -22,6 +22,7 @@
             android:id="@+id/vehicle_icon"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:contentDescription="@string/loading"
             android:src="@drawable/loading"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
